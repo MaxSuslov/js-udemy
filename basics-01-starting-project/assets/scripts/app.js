@@ -1,18 +1,13 @@
 const defaultResult = 0;
 let currentResult = defaultResult;
 
-function add(num1, num2) {
-  const result = num1 + num2;
-  alert('The result is ' + result);
+function add() {
+  // We take 2 global variables (defined in vendor.js) and use them in calculation
+  // .value gives us what the user entered
+  currentResult = currentResult + userInput.value;
+  outputResult(currentResult, userInput.value);
 }
 
-add(1, 2);
-add(5, 5);
-
-currentResult = ((currentResult + 10) * 3) / 2 - 1;
-
-let calculationDescription = `(${defaultResult} + 10) * 3 / 2 - 1`;
-
-let errorMessage = 'Some weird \n' + 'error message';
-
-outputResult(currentResult, errorMessage);
+// Hey, JS, when the button is clicked, have a look at the button of this name (add)
+// just the function name without () or ""
+addBtn.addEventListener('click', add);
