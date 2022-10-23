@@ -28,33 +28,40 @@ function writeToLog(
 }
 
 function calculateResult(calculationType) {
+  // if (
+  //   calculationType != 'ADD' &&
+  //   calculationType != 'SUBSTRACT' &&
+  //   calculationType != 'MULTIPLY' &&
+  //   calculationType != 'DIVIDE'
+  // ) {
+  //   return;
+  // }
+
   if (
-    calculationType != 'ADD' &&
-    calculationType != 'SUBSTRACT' &&
-    calculationType != 'MULTIPLY' &&
+    calculationType != 'ADD' ||
+    calculationType != 'SUBSTRACT' ||
+    calculationType != 'MULTIPLY' ||
     calculationType != 'DIVIDE'
   ) {
-    return;
+    const enteredNumber = getUserNumberInput();
+    const initialResult = currentResult;
+    let mathOperator;
+    if (calculationType === 'ADD') {
+      currentResult += enteredNumber;
+      mathOperator = '+';
+    } else if (calculationType === 'SUBSTRACT') {
+      currentResult -= enteredNumber;
+      mathOperator = '-';
+    } else if (calculationType === 'MULTIPLY') {
+      currentResult *= enteredNumber;
+      mathOperator = '*';
+    } else if (calculationType === 'DIVIDE') {
+      currentResult /= enteredNumber;
+      mathOperator = '/';
+    }
+    createAndWriteLog(mathOperator, initialResult, enteredNumber);
+    writeToLog(calculationType, initialResult, enteredNumber, currentResult);
   }
-
-  const enteredNumber = getUserNumberInput();
-  const initialResult = currentResult;
-  let mathOperator;
-  if (calculationType === 'ADD') {
-    currentResult += enteredNumber;
-    mathOperator = '+';
-  } else if (calculationType === 'SUBSTRACT') {
-    currentResult -= enteredNumber;
-    mathOperator = '-';
-  } else if (calculationType === 'MULTIPLY') {
-    currentResult *= enteredNumber;
-    mathOperator = '*';
-  } else if (calculationType === 'DIVIDE') {
-    currentResult /= enteredNumber;
-    mathOperator = '/';
-  }
-  createAndWriteLog(mathOperator, initialResult, enteredNumber);
-  writeToLog(calculationType, initialResult, enteredNumber, currentResult);
 }
 
 function add() {
