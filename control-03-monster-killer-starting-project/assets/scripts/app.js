@@ -12,6 +12,12 @@ let hasBonusLife = true;
 
 adjustHealthBars(chosenMaxLife);
 
+function reset() {
+  currentMonsterHealth = chosenMaxLife;
+  currentPlayerHealth = chosenMaxLife;
+  resetGame(chosenMaxLife);
+}
+
 function endRound() {
   // Backup the player health before the monster hits us
   const initialPlayerHealth = currentPlayerHealth;
@@ -32,6 +38,10 @@ function endRound() {
     alert('You lost!');
   } else if (currentPlayerHealth <= 0 && currentMonsterHealth <= 0) {
     alert('You have a draw!');
+  }
+  // If somebody won/lost/draw, reset the health and UI
+  if (currentMonsterHealth <= 0 || currentPlayerHealth <= 0) {
+    reset();
   }
 }
 
