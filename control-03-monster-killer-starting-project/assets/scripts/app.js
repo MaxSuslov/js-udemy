@@ -5,7 +5,17 @@ const MONSTER_ATTACK_VALUE = 14;
 const STRONG_ATTACK_VALUE = 17;
 const HEAL_VALUE = 20;
 
-let chosenMaxLife = 100;
+// writing the user input in a variable (prompt returns the input value (as a string!) or default)
+const enteredValue = prompt('Maximum life for you and the monster', '100');
+
+// converting the prompt value to a number if we enter non-valid numbers (strings) or negative or 0 or press cancel (returns null)
+let chosenMaxLife = parseInt(enteredValue);
+
+// initial validation checks
+if (isNaN(chosenMaxLife) || chosenMaxLife <= 0) {
+  chosenMaxLife = 100;
+}
+
 let currentMonsterHealth = chosenMaxLife;
 let currentPlayerHealth = chosenMaxLife;
 let hasBonusLife = true;
