@@ -182,7 +182,33 @@ function healPlayerHandler() {
 }
 
 function printLogHandler() {
-  console.log(battleLog);
+  // for (;;) - infinite loop, crushes the memory and browser. We can omit some of 3 parts in ()
+  // for (let i = 0; i < battleLog.lengh; i++){console.log(battleLog[i]);} - iterate through all the imtems in the array
+  // for (let i = 10; i > 0; ) {
+  //   i--;
+  //   console.log(i);
+  //   // 9-0
+  // }
+  for (let i = 0; i < 3; i++) {
+    console.log('------------');
+  }
+  // const is not overwritten, but recreated every iteration
+  let i = 0;
+  for (const logEntry of battleLog) {
+    console.log(`#${i}`);
+    // inside of each for-of loop (only for arrays and maybe strings) this inner for-in loop will be run to extract the event key and value
+    for (const key in logEntry) {
+      // key here is the name of the key (event, finalMonsterHealth, target, value etc)
+      // console.log(key);
+      // don't use key as a name (logEntry.key) - it doesn't exist in the object, but only inside this for-in
+      // we use different syntax to access the value of the object properties - the name inside of [] has to be a string (or a variable that holds the property name you want to access)!
+      // JS will extract the value stored in this constant
+      // console.log(logEntry[key]);
+      // for readability better write like this:
+      console.log(`${key} => ${logEntry[key]}`);
+    }
+    i++;
+  }
 }
 
 attackBtn.addEventListener('click', attackHandler);
