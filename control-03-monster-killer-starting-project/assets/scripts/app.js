@@ -182,20 +182,17 @@ function healPlayerHandler() {
 }
 
 function printLogHandler() {
-  // for (;;) - infinite loop, crushes the memory and browser. We can omit some of 3 parts in ()
-  // for (let i = 0; i < battleLog.lengh; i++){console.log(battleLog[i]);} - iterate through all the imtems in the array
-  // for (let i = 10; i > 0; ) {
-  //   i--;
-  //   console.log(i);
-  //   // 9-0
-  // }
   for (let i = 0; i < 3; i++) {
     console.log('------------');
   }
-  // const is not overwritten, but recreated every iteration
-  let i = 0;
+  let j = 0;
+  do {
+    console.log(j);
+    j++;
+  } while (j < 3);
+
   for (const logEntry of battleLog) {
-    console.log(`#${i}`);
+    console.log(`#${j}`);
     // inside of each for-of loop (only for arrays and maybe strings) this inner for-in loop will be run to extract the event key and value
     for (const key in logEntry) {
       // key here is the name of the key (event, finalMonsterHealth, target, value etc)
