@@ -15,19 +15,31 @@ const LOG_EVENT_MONSTER_STRONG_ATTACK = 'MONSTER_STRONG_ATTACK';
 const LOG_EVENT_PLAYER_HEAL = 'PLAYER_HEAL';
 const LOG_EVENT_GAME_OVER = 'GAME_OVER';
 
-// writing the user input in a variable (prompt returns the input value (as a string!) or default)
-const enteredValue = prompt('Maximum life for you and the monster', '100');
-
-// converting the prompt value to a number if we enter non-valid numbers (strings) or negative or 0 or press cancel (returns null)
-let chosenMaxLife = parseInt(enteredValue);
-
 let battleLog = [];
 let lastLoggedEntry;
 
-// initial validation checks
-if (isNaN(chosenMaxLife) || chosenMaxLife <= 0) {
-  chosenMaxLife = 100;
+function getMaxLifeValues() {
+  const enteredValue = prompt('Maximum life for you and the monster', '100');
+  const parsedValue = parseInt(enteredValue);
+  if (isNaN(parsedValue) || parsedValue <= 0) {
+    throw { message: 'Invalid user input, not a number!' };
+  }
+  return parsedValue;
 }
+
+let chosenMaxLife;
+try {
+  chosenMaxLife = getMaxLifeValues();
+  // In catch () you pass a parameter, you can name it whatever you want, typically "error", it is available then in {...} in catch.
+} catch (error) {
+  console.log(error);
+  chosenMaxLife = 100;
+  alert('You entered something wrong, default value of 100 was used.');
+  // re-throwing an error (typically not needed if you have a fallback), we might want to send the error message to e.g. our own analytic server
+  // throw error;
+}
+// finally {
+// }
 
 let currentMonsterHealth = chosenMaxLife;
 let currentPlayerHealth = chosenMaxLife;
