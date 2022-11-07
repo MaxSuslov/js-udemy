@@ -33,19 +33,36 @@ const getComputerChoice = function () {
   }
 };
 
-const getWinner = function (cChoice, pChoice) {
-  if (cChoice === pChoice) {
-    return DRAW;
-  } else if (
-    (cChoice === ROCK && pChoice === PAPER) ||
-    (cChoice === PAPER && pChoice === SCISSORS) ||
-    (cChoice === SCISSORS && pChoice === ROCK)
-  ) {
-    return RESULT_PLAYER_WINS;
-  } else {
-    return RESULT_COMPUTER_WINS;
-  }
-};
+// const getWinner = function (cChoice, pChoice) {
+//   if (cChoice === pChoice) {
+//     return DRAW;
+//   } else if (
+// (cChoice === ROCK && pChoice === PAPER) ||
+// (cChoice === PAPER && pChoice === SCISSORS) ||
+// (cChoice === SCISSORS && pChoice === ROCK)
+//   ) {
+//     return RESULT_PLAYER_WINS;
+//   } else {
+//     return RESULT_COMPUTER_WINS;
+//   }
+// };
+
+// Rewriting getWinner as a ternary expression
+// You can omit return keyword and {} as if it would be one line
+const getWinner = (cChoice, pChoice) =>
+  cChoice === pChoice
+    ? RESULT_DRAW
+    : (cChoice === ROCK && pChoice === PAPER) ||
+      (cChoice === PAPER && pChoice === SCISSORS) ||
+      (cChoice === SCISSORS && pChoice === ROCK)
+    ? RESULT_PLAYER_WINS
+    : RESULT_COMPUTER_WINS;
+
+// const add = (a, b) => a + b;
+
+// const add2 = function (a, b) {
+//   return a + b;
+// };
 
 // startGame();
 startGameBtn.addEventListener('click', function () {
