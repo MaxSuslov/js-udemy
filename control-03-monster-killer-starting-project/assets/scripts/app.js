@@ -22,6 +22,7 @@ const enteredValue = prompt('Maximum life for you and the monster', '100');
 let chosenMaxLife = parseInt(enteredValue);
 
 let battleLog = [];
+let lastLoggedEntry;
 
 // initial validation checks
 if (isNaN(chosenMaxLife) || chosenMaxLife <= 0) {
@@ -185,27 +186,48 @@ function printLogHandler() {
   for (let i = 0; i < 3; i++) {
     console.log('------------');
   }
+  // let j = 0;
+  // do {
+  //   console.log(j);
+  //   j++;
+  // } while (j < 3);
+
+  // for (const logEntry of battleLog) {
+  //   console.log(`#${j}`);
+  //   for (const key in logEntry) {
+  //     console.log(`${key} => ${logEntry[key]}`);
+  //   }
+  //   j++;
+  // }
+
+  // Shows the log only 1 at a time, then break; press "Show log" again to see the next battle step log.
+  // let i = 0;
+  // for (const logEntry of battleLog) {
+  //   if ((!lastLoggedEntry && lastLoggedEntry !== 0) || lastLoggedEntry < i) {
+  //     console.log(`#${i}`);
+  //     for (const key in logEntry) {
+  //       console.log(`${key} => ${logEntry[key]}`);
+  //     }
+  //     lastLoggedEntry = i;
+  //     break;
+  //   }
+  //   i++;
+  // }
+
   let j = 0;
-  do {
-    console.log(j);
+  outerWhile: do {
+    console.log('Outer', j);
+    innerFor: for (let k = 0; k < 5; k++) {
+      if (k === 3) {
+        // if we want to break out of the outer loop inside of the inner loop, we can use labeled statements.
+        break outerWhile;
+        // continue outerWhile; // dangerous! => Infinite loop!
+        // j++ will never be executed!
+      }
+      console.log('Inner', k);
+    }
     j++;
   } while (j < 3);
-
-  for (const logEntry of battleLog) {
-    console.log(`#${j}`);
-    // inside of each for-of loop (only for arrays and maybe strings) this inner for-in loop will be run to extract the event key and value
-    for (const key in logEntry) {
-      // key here is the name of the key (event, finalMonsterHealth, target, value etc)
-      // console.log(key);
-      // don't use key as a name (logEntry.key) - it doesn't exist in the object, but only inside this for-in
-      // we use different syntax to access the value of the object properties - the name inside of [] has to be a string (or a variable that holds the property name you want to access)!
-      // JS will extract the value stored in this constant
-      // console.log(logEntry[key]);
-      // for readability better write like this:
-      console.log(`${key} => ${logEntry[key]}`);
-    }
-    i++;
-  }
 }
 
 attackBtn.addEventListener('click', attackHandler);
