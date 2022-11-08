@@ -85,3 +85,33 @@ startGameBtn.addEventListener('click', () => {
   alert(message);
   gameIsRunning = false;
 });
+
+// not relating to the game;
+// adding all numbers from an array
+const sumUp = (resultHandler, ...numbers) => {
+  const validateNumber = (number) => {
+    return isNaN(number) ? 0 : number;
+  };
+  let sum = 0;
+  for (num of numbers) {
+    sum = sum + validateNumber(num);
+  }
+  resultHandler(sum);
+};
+
+const substactUp = function () {
+  let sum = 0;
+  for (const num of arguments) {
+    // don't use that!
+    sum -= num;
+  }
+  return sum;
+};
+
+const showResult = (result) => {
+  alert('The result after adding all numbers is: ' + result);
+};
+
+sumUp(showResult, 1, 'fsda', 5, -2, 6, 10);
+sumUp(showResult, 1, 3, 5, -2, 6, 10, 20, 35);
+console.log(substactUp(1, 3, 5, 2, 6, 10));
